@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import AddCity from "./components/AddCity/AddCity";
+import CityList from "./components/CityList/CityList";
+import WeatherList from "./components/WeatherList/WeatherList";
+import VisibilityFilters from "./components/VisibilityFilters/VisibilityFilters";
+import "./styles.css";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>Weather</h1>
+      <AddCity />
+      <CityList />
+      <VisibilityFilters />
+      <WeatherList />
     </div>
   );
 }
-
-export default App;

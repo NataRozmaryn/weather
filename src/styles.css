@@ -1,0 +1,31 @@
+.app {
+    font-family: sans-serif;
+  }
+  
+  .add-city {
+    margin-left: 0.5rem;
+  }
+  
+  .city-list {
+    margin-top: 1rem;
+    text-align: left;
+    list-style: none;
+  }
+  
+  .city-item {
+    font-family: monospace;
+    cursor: pointer;
+    line-height: 1.5;
+  }
+  .city-item__text--selected {
+    font-weight: bold;
+  }
+  
+  .filter {
+    padding: 0.3rem 0;
+    margin: 0 0.3rem;
+    cursor: pointer;
+  }
+  .filter--active {
+    border-bottom: 1px solid black;
+  }
