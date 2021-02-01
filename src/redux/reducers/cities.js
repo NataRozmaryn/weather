@@ -1,12 +1,12 @@
-import { ADD_CITY, TOGGLE_CITY } from "../actionTypes";
+import { ADD_CITY, TOGGLE_CITY, DELETE_CITY } from "../actionTypes";
 
 const initialState = {
   allIds: [],
   byIds: {}
 };
 
-export default function(state = initialState, action) {
-  console.log(state, action);
+export default function cities(state = initialState, action) {
+  console.log("cities reducer ", state, action);
   switch (action.type) {
     case ADD_CITY: {
       const { id, content } = action.payload;
@@ -33,6 +33,15 @@ export default function(state = initialState, action) {
             selected: !state.byIds[id].selected
           }
         }
+      };
+    }
+    case DELETE_CITY: {
+      const { id } = action.payload;
+      let newByIds = {...state.byIds};
+      delete newByIds[id];
+      return {...state,
+        byIds: newByIds,
+        allIds: state.allIds.filter(item => item!==id)
       };
     }
     default:

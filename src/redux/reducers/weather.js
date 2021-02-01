@@ -10,7 +10,6 @@ export default function weather (state = initialState, action)
         case WEATHER_ACTIONS.WEATHER_REQUESTED:
             return { ...state, weatherRequested: true }
         case WEATHER_ACTIONS.WEATHER_RECEIVED:
-            debugger;
             let res = { ...state, weatherRequested: false };
             res.cities = [...res.cities];
             res.cities[action.payload.city.id] = action.payload.weather;

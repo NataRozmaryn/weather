@@ -1,4 +1,4 @@
-import { ADD_CITY, TOGGLE_CITY, SET_FILTER} from "./actionTypes";
+import { ADD_CITY, TOGGLE_CITY, DELETE_CITY, SET_FILTER} from "./actionTypes";
 import axios from 'axios';
 import { WEATHER_ACTIONS } from "../constants";
 
@@ -20,9 +20,15 @@ export const toggleCity = id => ({
   payload: { id }
 });
 
+export const deleteCity = id => ({
+  type: DELETE_CITY,
+  payload: { id }
+});
+
 export const setFilter = filter => ({ type: SET_FILTER, payload: { filter } });
 
 export const getWeatherByCityAction = (city) => (dispatch, state) => {
+  debugger;
   dispatch ({type: WEATHER_ACTIONS.WEATHER_REQUESTED});
   axios.get(`${BASE_URL}?q=${city.content}&appid=${API_KEY}`)
     .then((res) => {
