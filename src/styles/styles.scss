@@ -1,0 +1,166 @@
+$font-weight-light: 300;
+$font-weight-medium: 400;
+$font-weight-bold: 700;
+
+// Material design colors...wooo!
+// gdarrigo : P
+$background:    #FDFDFD;
+$white:         #FFFFFF;
+$black:         #000000;
+
+$blue_200:      #90CAF9;
+$blue_400:      #42A5F5;
+$blue_500:      #2196F3;
+$blue_800:      #1565C0;
+
+$gray_100:      #F5F5F5;
+$gray_200:      #EEEEEE;
+$gray_300:      #DEDEDE;
+$gray_400:      #BDBDBD;
+$gray_900:      #313131;
+.app {
+    padding: 1rem;
+    text-align: center;
+}
+body {
+    background-color: $gray_100;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.title {
+    margin: 0;
+    font-size: 2rem;
+    @media only screen and (min-width: 1024px) {
+        font-size: 2.5rem;
+    }
+}
+.search-bar {
+    display: flex;
+    margin: 1.5rem auto;
+    text-align: center;
+    width: 90%;
+
+    @media only screen and (min-width: 1024px) {
+        display: block;
+        margin: 2rem auto;
+        width: 60%;
+    }
+
+    &__input {
+        border: 1px solid $gray_300;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        height: 42.5px;
+        padding: 0 5px;
+        transition: all 0.1s;
+        width: 100%;
+
+        @media only screen and (min-width: 1024px) {
+            width: 375px;
+        }
+
+        &:active,
+        &:hover {
+            border: 1px solid $gray_400;
+        }
+    }
+
+    &__control {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: $blue_500;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        border: none;
+        color: $white;
+        height: 42.5px;
+        margin: 0 0 0 5px;
+        padding: 2.5px 10px;
+        text-transform: uppercase;
+
+        &:hover {
+            cursor: pointer;
+            background-color: $blue_400;
+        }
+    }
+}
+.weather {
+    background-color: $white;
+    border: 1px solid $gray_300;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    margin: 0 auto 1rem;
+    padding: 1rem;
+    position: relative;
+    width: 90%;
+
+    @media only screen and (min-width: 1024px) {
+        padding: 2rem;
+        width: 50%;
+    }
+
+    &__city {
+        font-weight: $font-weight-medium;
+        margin: 0;
+    }
+
+    &__time {
+        font-weight: $font-weight-light;
+        margin: 0 0.2rem;
+    }
+
+    &__temperature {
+        font-size: 4rem;
+        margin: 1rem;
+
+        > .icon {
+            color: $gray_900;
+        }
+
+        > .metric {
+            font-size: 2rem;
+            font-weight: $font-weight-medium;
+            vertical-align: top;
+        }
+    }
+
+    &__weather {
+        &__title {
+            font-weight: $font-weight-light;
+            margin-bottom: 0;
+        }
+
+        &__label {
+            padding: 0 0.2rem 0 0;
+            vertical-align: middle;
+        }
+
+        &__conditions {
+            font-size: 1.2rem;
+            vertical-align: middle;
+
+            &:after {
+                content: ", ";
+            }
+
+            &:last-child {
+                &:after {
+                    content: "";
+                }
+            }
+        }
+    }
+
+    &__stats {
+        @media only screen and (min-width: 768px) {
+            position: absolute;
+            right: 2rem;
+            top: 2rem;
+            width: 40%;
+        }
+
+        &__title {
+            font-size: $font-weight-light;
+        }
+    }
+}

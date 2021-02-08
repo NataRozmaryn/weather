@@ -29,3 +29,10 @@
   .filter--active {
     border-bottom: 1px solid black;
   }
+
+  /* .weather-item {
+    margin: auto;
+    width: 150px;
+    text-align: center;
+    border:1px solid gray;
+  } */

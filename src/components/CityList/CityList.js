@@ -1,22 +1,22 @@
 import React from "react";
 import { connect } from "react-redux";
 import City from "../City/City";
-import { getCitiesByVisibilityFilter } from "../../redux/selectors";
-import { VISIBILITY_FILTERS } from "../../constants";
 
 const CityList = ({ cities }) => (
-  <ul className="todo-list">
-    {cities && cities.length
-      ? cities.map((city, index) => {
-          return <City key={`todo-${city.id}`} city={city} />;
-        })
-      : "empty"}
-  </ul>
+  <div className="city-list">
+    {cities
+      ? Object.keys(cities).map((id) => {
+        let city = cities[id];
+        console.log("list", city);
+        return <City key={`todo-${id}`} cityId={id} city={city} />;
+      })
+      : ""}
+  </div>
 );
 
 const mapStateToProps = state => {
-  const { visibilityFilter } = state;
-  const cities = getCitiesByVisibilityFilter(state, visibilityFilter);
-  return { cities };
+  let keys = Object.keys(state);
+  return { cities: state.cities_reducer, keys };
 };
+
 export default connect(mapStateToProps)(CityList);

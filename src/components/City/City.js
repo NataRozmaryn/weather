@@ -1,23 +1,22 @@
 import React from "react";
 import { connect } from "react-redux";
 import cx from "classnames";
-import { toggleCity, deleteCity } from "../../redux/actions";
+import { remCityFromMonitoring, toggleCityMonitoring } from "../../redux/reducers/cities_actions";
 
-const City = ({ city, toggleCity, deleteCity }) => (
-  <li className="city-item" >
-    <span onClick={() => toggleCity(city.id)}
+const City = ({ city, toggleCityMonitoring: toggleCity, remCityFromMonitoring: deleteCity, cityId }) => (
+  <button className="city-item" >
+    <span onClick={() => toggleCity(cityId)}
       className={cx(
         "city-item__text",
-        city && city.selected && "city-item__text--selected"
+        city && city.enabled && "city-item__text--selected"
       )}
     >
-       {city.content}
-    </span> <span onClick={() => deleteCity(city.id)}>   x</span>
-  </li>
+      {city.name}
+    </span> <span onClick={() => deleteCity(cityId)}>   x</span>
+  </button>
 );
 
-// export default CityList;
 export default connect(
   null,
-  { toggleCity, deleteCity }
+  { toggleCityMonitoring, remCityFromMonitoring }
 )(City);

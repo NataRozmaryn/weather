@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
-import visibilityFilter from "./visibilityFilter";
-import cities from "./cities";
-import weather from "./weather";
+import cities_reducer from "./cities_reducer";
+import weather_reducer from "./weather_reducer";
 
-export default combineReducers({ cities, visibilityFilter, weather });
+export default combineReducers({ cities_reducer, weather_reducer });

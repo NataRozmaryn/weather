@@ -1,38 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { addCity } from "../../redux/actions";
+import { getCity } from "../../redux/reducers/cities_actions";
 
-class AddCity extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { input: "" };
-  }
+const AddCity = ({ searchCity }) => {
+  const [input, setInput] = useState("");
 
-  updateInput = input => {
-    this.setState({ input });
+  const updateInput = input => {
+    setInput(input);
   };
 
-  handleAddCity = () => {
-    this.props.addCity(this.state.input);
-    this.setState({ input: "" });
+  const handleAddCity = () => {
+    searchCity(input);
+    setInput("");
   };
 
-  render() {
-    return (
-      <div>
-        <input
-          onChange={e => this.updateInput(e.target.value)}
-          value={this.state.input}
-        />
-        <button className="add-city" onClick={this.handleAddCity}>
-          Find
+
+  return (
+    <div className="search-bar">
+      <input
+        type="search"
+        onChange={e => updateInput(e.target.value)}
+        value={input}
+        className="search-bar__input"
+        placeholder="Search for a city"
+      />
+      <button
+        type="submit"
+        className="search-bar__control"
+        onClick={handleAddCity}>
+        Search
         </button>
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    searchCity: (cityName) => getCity(dispatch, cityName)
+  }
+}
 export default connect(
   null,
-  { addCity }
+  mapDispatchToProps
 )(AddCity);
