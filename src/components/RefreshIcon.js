@@ -1,0 +1,11 @@
+import React from "react";
+import refrashIcon from "../icons/refresh.svg";
+
+const RefreshIcon = ({onClick}) => {
+    return (
+        <div className="weather__refresh">
+            <img src={refrashIcon} alt="refresh" onClick={onClick}/>
+        </div>
+    );
+}
+export default RefreshIcon;

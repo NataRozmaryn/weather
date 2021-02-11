@@ -4,24 +4,26 @@ $font-weight-bold: 700;
 
 // Material design colors...wooo!
 // gdarrigo : P
-$background:    #FDFDFD;
-$white:         #FFFFFF;
-$black:         #000000;
+$background: #FDFDFD;
+$white: #FFFFFF;
+$black: #000000;
 
-$blue_200:      #90CAF9;
-$blue_400:      #42A5F5;
-$blue_500:      #2196F3;
-$blue_800:      #1565C0;
+$blue_200: #90CAF9;
+$blue_400: #42A5F5;
+$blue_500: #2196F3;
+$blue_800: #1565C0;
 
-$gray_100:      #F5F5F5;
-$gray_200:      #EEEEEE;
-$gray_300:      #DEDEDE;
-$gray_400:      #BDBDBD;
-$gray_900:      #313131;
+$gray_100: #F5F5F5;
+$gray_200: #EEEEEE;
+$gray_300: #DEDEDE;
+$gray_400: #BDBDBD;
+$gray_900: #313131;
+
 .app {
     padding: 1rem;
-    text-align: center;
+    // text-align: center;
 }
+
 body {
     background-color: $gray_100;
     height: 100%;
@@ -33,10 +35,12 @@ body {
 .title {
     margin: 0;
     font-size: 2rem;
+
     @media only screen and (min-width: 1024px) {
         font-size: 2.5rem;
     }
 }
+
 .search-bar {
     display: flex;
     margin: 1.5rem auto;
@@ -83,8 +87,45 @@ body {
             cursor: pointer;
             background-color: $blue_400;
         }
+        
+        &.selected {
+            border:none;
+            background-color: $blue_800;
+        }
+        &.unselected {
+            border:none;
+            background-color: $blue_200;
+        }
     }
 }
+
+.city-item {
+    &__selected {
+    font-family: monospace;
+    cursor: pointer;
+    line-height: 1.5;
+    opacity:1;
+    color:$white;
+    background-color: $blue_500;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    }
+    ￼ &__unselected {
+        opacity: 0.8;
+        font-family: monospace;
+        cursor: pointer;
+        line-height: 1.5;
+        opacity:1;
+        color:$white;
+        background-color: $blue_500;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    }
+    
+}
+.weather-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .weather {
     background-color: $white;
     border: 1px solid $gray_300;
@@ -92,7 +133,13 @@ body {
     margin: 0 auto 1rem;
     padding: 1rem;
     position: relative;
-    width: 90%;
+   
+    // width: 90%;
+    &__refresh {
+        height: 15px;
+        width: 15px;
+        cursor: pointer;
+    }
 
     @media only screen and (min-width: 1024px) {
         padding: 2rem;
@@ -113,11 +160,11 @@ body {
         font-size: 4rem;
         margin: 1rem;
 
-        > .icon {
+        >.icon {
             color: $gray_900;
         }
 
-        > .metric {
+        >.metric {
             font-size: 2rem;
             font-weight: $font-weight-medium;
             vertical-align: top;
@@ -164,3 +211,4 @@ body {
         }
     }
 }
+
