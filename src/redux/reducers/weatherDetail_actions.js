@@ -14,7 +14,7 @@ export const detailWeatherFailure = e => ({
     payload: e
 });
 export const getDetailWeather = async (dispatch, coord) => {
-    debugger;
+    //debugger;
     dispatch(detailWeatherRequest(coord));
 
     try {

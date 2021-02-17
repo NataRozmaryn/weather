@@ -2,14 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import cx from "classnames";
 import { remCityFromMonitoring, toggleCityMonitoring } from "../../redux/reducers/cities_actions";
-import trashIcon from "../../icons/trash.svg";
 import CloseIcon from "../CloseIcon";
+import Button from '@material-ui/core/Button';
 
 const City = ({ city, toggleCityMonitoring: toggleCity, remCityFromMonitoring: deleteCity, cityId }) => {
   const classname = "search-bar__control " + (city.enabled ? "selected" : "unselected");
 
   return (
-    <button className={classname} >
+    <Button className={classname} size="small" fontSize="small">
       <span onClick={() => toggleCity(cityId)}
         className={cx(
           "city-item__text",
@@ -18,7 +18,7 @@ const City = ({ city, toggleCityMonitoring: toggleCity, remCityFromMonitoring: d
       >
         {city.name}
       </span> <span onClick={() => deleteCity(cityId)}><CloseIcon/></span>
-    </button>
+    </Button>
 )};
 
 export default connect(

@@ -16,7 +16,7 @@ const CityList = ({ cities }) => (
 
 const mapStateToProps = state => {
   let keys = Object.keys(state);
-  return { cities: state.cities_reducer, keys };
+  return { cities: state.cities, keys };
 };
 
 export default connect(mapStateToProps)(CityList);

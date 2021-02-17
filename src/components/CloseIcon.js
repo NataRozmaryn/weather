@@ -1,8 +1,8 @@
 import React from "react"
 
 const CloseIcon = ({height, width, fill}) => {
-    const onMouseEnter = () => { fill = "white"};
-    const onMouseLeave = () => { fill = "blue"};
+    const onMouseEnter = () =>  fill = "white";
+    const onMouseLeave = () =>  fill = "blue";
     return (
         <svg className="closeIcon"
             onMouseEnter={onMouseEnter}
@@ -22,8 +22,5 @@ export default CloseIcon;
 CloseIcon.defaultProps = {
     width: "10pt",
     height: "10pt", 
-    fill:"blue",
-    // fill: "white",
-    // onMouseEnter: (() => { fill: "white"}),
-    // onMouseLeave: () => { fill: "blue"}
+    fill:"blue"
   };

@@ -15,7 +15,7 @@ const WeatherList = ({ cities }) => {
 }
 
 const mapStateToProps = state => {
-  const cities = Object.values(state.cities_reducer).filter(item =>
+  const cities = Object.values(state.cities).filter(item =>
     item.enabled);
   return { cities };
 };

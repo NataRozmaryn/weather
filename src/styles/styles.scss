@@ -26,10 +26,25 @@ $gray_900: #313131;
 
 body {
     background-color: $gray_100;
-    height: 100%;
+    // height: 100vh;
     margin: 0;
     padding: 0;
     width: 100%;
+    font-size: 8px;
+    background-image: url(../icons/weather_background1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: $white;
+}
+a{
+    text-decoration: none;
+}
+.closeIcon:hover{
+    fill: $white;
+}
+
+.MuiTypography-body1 {
+    font-size: 0.6rem;
 }
 
 .title {
@@ -39,8 +54,12 @@ body {
     @media only screen and (min-width: 1024px) {
         font-size: 2.5rem;
     }
-}
 
+}
+.toggleCity{
+    display: flex;
+    overflow-x: auto;//scroll; 
+}
 .search-bar {
     display: flex;
     margin: 1.5rem auto;
@@ -87,58 +106,71 @@ body {
             cursor: pointer;
             background-color: $blue_400;
         }
-        
+
         &.selected {
-            border:none;
+            border: none;
             background-color: $blue_800;
         }
+
         &.unselected {
-            border:none;
+            border: none;
             background-color: $blue_200;
         }
     }
 }
+.city-list{
+    display: flex;
+}
 
 .city-item {
-    &__selected {
-    font-family: monospace;
-    cursor: pointer;
-    line-height: 1.5;
-    opacity:1;
-    color:$white;
-    background-color: $blue_500;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    &__text{ 
+        color: $white;
     }
+    &__selected {
+        font-family: monospace;
+        cursor: pointer;
+        line-height: 1.5;
+        opacity: 1;
+        color: $white;
+        background-color: $blue_500;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    }
+
     ￼ &__unselected {
         opacity: 0.8;
         font-family: monospace;
         cursor: pointer;
         line-height: 1.5;
-        opacity:1;
-        color:$white;
+        opacity: 1;
+        color: $white;
         background-color: $blue_500;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
     }
-    
+
 }
+
 .weather-list {
     display: flex;
     flex-wrap: wrap;
 }
 
 .weather {
-    background-color: $white;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.4);
     border: 1px solid $gray_300;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
     margin: 0 auto 1rem;
     padding: 1rem;
     position: relative;
-   
-    // width: 90%;
     &__refresh {
         height: 15px;
         width: 15px;
         cursor: pointer;
+
+        &__img {
+            height: 15px;
+            width: 15px;
+        }
     }
 
     @media only screen and (min-width: 1024px) {
@@ -212,3 +244,67 @@ body {
     }
 }
 
+.forecast {
+    color: $white;
+    font-size: 12px;
+    margin: 10px 0;
+
+    &_item {
+        margin: 10px;
+        border: 1px solid $white; 
+        background-color: rgba(255, 255, 255, 0.09);
+    }
+    h2 {
+        text-align: center;
+    }
+    &_img {
+        margin: auto;    
+        // margin-left: 50%;
+        // margin-right: 50%;
+    }
+
+    &_general {
+        background-color: rgba(255, 255, 255, 0.2);
+        text-align: center;
+    }
+}
+.root {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    overflow: hidden;
+}
+.gridList {
+    flex-wrap: nowrap!important;
+    transform: translateZ(0);
+    text-align: center;
+    &_item {
+            font-size: 8px;
+            background-color: rgba(255,255,255,0.2);
+            color:$white;
+            background-position: center;
+            display: flex; 
+            flex-direction: column; 
+            margin-top: '5px';
+        }
+        &_img{
+            width: 40px;
+            height: 40px;
+        }
+        &_content{
+            padding: 0;
+        }
+  }
+  #gridList_root{
+      height: 210px!important;
+  }
+#gridList_item {
+    font-size: 0.8rem;
+    flex-wrap: nowrap;
+    transform: translateZ(0);
+    background-color: rgba(255,255,255,0.2);
+    color:$white;
+    &_content{
+        padding: 0px;
+    }
+  }

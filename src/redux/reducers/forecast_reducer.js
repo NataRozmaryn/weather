@@ -6,10 +6,10 @@ const initialState = {
     isLoading: false,
     error: null
 };
-export default function weatherDetail(state = initialState, action) {
+export default function forecast(state = initialState, action) {
     console.log(state, action);
     switch (action.type) {
-        case types.WEATHER_DETAIL_REQUEST: {//debugger;
+        case types.FORECAST_REQUEST: {
             return {
                 ...state,
                 [action.payload.cityID]: {
@@ -18,18 +18,18 @@ export default function weatherDetail(state = initialState, action) {
                 }
             }
         }
-        case types.WEATHER_DETAIL_FAILURE: {
+        case types.FORECAST_FAILURE: {
             return {
                 ...state,
                 isLoading: false
             }
         }
-        case types.WEATHER_DETAIL_SUCCESS: {
+        case types.FORECAST_SUCCESS: {
             return {
                 ...state,
                 [action.payload.cityID]: {
                     isLoading: false,
-                    weatherData: action.payload.data.hourly
+                    weatherData: action.payload.data.daily
                 }
             }
         }

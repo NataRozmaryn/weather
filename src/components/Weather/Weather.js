@@ -1,5 +1,4 @@
-import React, { useEffect, useReducer } from "react";
-import { Link, Route } from "react-router-dom";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import cx from "classnames";
 import { getWeather } from "../../redux/reducers/weather_actions";
@@ -7,20 +6,23 @@ import moment from 'moment';
 // import refrashIcon from "../../icons/refresh.svg";
 import RefreshIcon from "../RefreshIcon";
 import DetailWeather from '../DetailWeather/DetailWeather';
-
+import { Button } from "@material-ui/core";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Forecast from "../Forecast/Forecast";
 
 const Weather = ({ city, getCityWeather, weather }) => {
-  const currentDate = () => {//debugger;
+  const currentDate = () => {
     return moment().utc().add(weather.timezone, 'seconds').format('dddd HH:mm')
   }
 
-  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
   function handleRefresh() {
-    forceUpdate();
+    getCityWeather(city);
   }
 
   useEffect(() => {
     getCityWeather(city);
+    let interval = setInterval(handleRefresh, 60000)
+    return () => {clearInterval(interval)};
   }, [city.id]);
 
   if (!weather || weather.isLoading) {
@@ -43,6 +45,7 @@ const Weather = ({ city, getCityWeather, weather }) => {
 
   return (
     <div className="weather">
+      {/* <RefreshIcon onClick={handleRefresh} /> */}
       <h2 className="weather__city">
         {city ? `City of ${city.name}` : ''}
       </h2>
@@ -54,7 +57,7 @@ const Weather = ({ city, getCityWeather, weather }) => {
         <h3 className="weather__temperature">
           {weather &&
             <img alt="" src={weatherUrl} />}
-          {Math.round(temp * 100) / 100}
+          {Math.round(temp)}
           <span className="metric">°C</span>
         </h3>
         : null
@@ -66,7 +69,6 @@ const Weather = ({ city, getCityWeather, weather }) => {
           </span>
           <strong className="current__weather__conditions">
             {weatherDescription}
-            {/* {weather.weather[0].main}, {weatherDescription} */}
           </strong>
         </h4>
       </article>
@@ -79,9 +81,15 @@ const Weather = ({ city, getCityWeather, weather }) => {
         {city.content}
       </p>
       <p> wind: <strong>{weather && weather.wind.speed} <span>m/s</span></strong> </p>
-      <RefreshIcon onClick={handleRefresh} />
-      <Link to={{pathname: `/${city.name}`, state: {city}}} > Get detail weather </Link> 
-      {/* <Route path={`/${city.name}`} component={DetailWeather} city={city}> Get detail weather </Route>  */}
+      
+      <Link to={{pathname: `/city`, state: {city}}} > detail weather </Link>    
+      <Link to={{pathname: `/cityforecast`, state: {city}}} > forecast</Link>
+      <Route path="/cityforecast" render={({ match, history, location }) => (
+          <div className="app" id="app">
+            <Button onClick={() => { history.goBack(); }}>&#10096; back</Button>
+            <Forecast  location={location} match={match}/>
+          </div>)}>
+        </Route>
     </div>
   )
 };
@@ -91,7 +99,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state, props) => {
-  const cityWeather = state.weather_reducer[props.city.id];
+  const cityWeather = state.weather[props.city.id];
   const weather = cityWeather ? cityWeather.weatherData : null;
   return { weather };
 }
