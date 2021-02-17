@@ -7,52 +7,25 @@ import Weather from '../Weather/Weather';
 import moment from "moment";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
 import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import DataManager from "../DataManager/DataManager";
 
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
-    },
-    gridList: {
-        flexWrap: 'nowrap',
-        // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-        transform: 'translateZ(0)',
-    },
-    title: {
-        color: theme.palette.primary.light,
-    },
-    titleBar: {
-        background:
-            'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-    },
-}));
 
-const DetailWeather = ({ coord, data, getCityWeather, location, match, dataD }) => {
+const DetailWeather = ({ cityName, coord, data, getCityWeather, short}) => {
     const time = currentDate();
 
     useEffect(() => {
-        console.log("1", dataD);
         if (coord) { //debugger;
             getCityWeather(coord);
         }
-    }, [coord]);
+    }, [cityName, coord]);
 
     if (!data) {
         return (<div className="weather">
+            <DataManager city={cityName}/>
             Loading weather detail
         </div>);
     }
@@ -60,7 +33,8 @@ const DetailWeather = ({ coord, data, getCityWeather, location, match, dataD }) 
         console.log("12", data);
         return (<div className="root">
             <GridList className="gridList" cols={2.5}>
-                {data && data.length ? data.map((item, i) => {
+                {data && data.length ? data.filter((item, i) => !short || i <= 10)
+                .map((item, i) => {
                     let date = moment(item.dt * 1000).format("DD.MM HH:mm");
                     let url = "http://openweathermap.org/img/w/" + item.weather[0].icon + ".png";
                     return (
@@ -102,22 +76,57 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state, props) => {
     //debugger;
-    let city = props.location?.state?.city;
-    // const cityWeather = props.city && state.weather_reducer[props.city.id];
-    const cityWeather = city && state.weather[city.id];
-    const coord = cityWeather && cityWeather.weatherData ? cityWeather.weatherData.coord : null;
+    // let city = props.location?.state?.city;
+    let cityName = props.city;
+    // const cityWeather = city && state.weather[city.id];
+    //const city=props.location?.state?.city
+    //if (!location?.state.weather[city]){getWeather(dispatch, city)} 
+    let cityId;
+    Object.keys(state.cities).forEach(id => {
+        debugger;
+        if (state.cities[id].name === cityName)
+            cityId = id;
+    });
+    console.log("mapStateToProps.cityId: ", cityId)
+    // const cityWeather = cityId ? state.weather[cityId] : null;
+    // const coord = cityWeather && cityWeather.weatherData ? cityWeather.weatherData.coord : null;
+    const coord = cityId ? state.cities[cityId].coord : null;
     if (coord) {
-        coord.cityID = city.id;
+        // coord.cityID = city.id;
+        coord.cityID = cityId;
     }
         
-    const weatherDetail = state.weatherDetail[city.id];
-    const dataD = weatherDetail && weatherDetail.weatherData ? weatherDetail.weatherDatanull : null;
+    // const weatherDetail = state.weatherDetail[city.id];
+    const weatherDetail = cityId ? state.weatherDetail[cityId] : null;
+    // const dataD = weatherDetail && weatherDetail.weatherData ? weatherDetail.weatherDatanull : null;
     const data = weatherDetail && weatherDetail.weatherData ? weatherDetail.weatherData : null;
     console.log("coord", coord);
-    return { coord, data, dataD };
+    return { cityName, coord, data };
 }
 export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(DetailWeather);
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        overflow: 'hidden',
+        backgroundColor: theme.palette.background.paper,
+    },
+    gridList: {
+        flexWrap: 'nowrap',
+        transform: 'translateZ(0)',
+    },
+    // title: {
+    //     color: theme.palette.primary.light,
+    // },
+    // titleBar: {
+    //     background:
+    //         'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+    // },
+}));
+
 

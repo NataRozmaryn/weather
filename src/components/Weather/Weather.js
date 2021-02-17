@@ -22,7 +22,7 @@ const Weather = ({ city, getCityWeather, weather }) => {
   useEffect(() => {
     getCityWeather(city);
     let interval = setInterval(handleRefresh, 60000)
-    return () => {clearInterval(interval)};
+    return () => { clearInterval(interval) };
   }, [city.id]);
 
   if (!weather || weather.isLoading) {
@@ -45,9 +45,8 @@ const Weather = ({ city, getCityWeather, weather }) => {
 
   return (
     <div className="weather">
-      {/* <RefreshIcon onClick={handleRefresh} /> */}
       <h2 className="weather__city">
-        {city ? `City of ${city.name}` : ''}
+        <Link to={{ pathname: `/cityforecast`, state: { city } }} >{city ? `${city.name}` : ''} </Link>
       </h2>
       <h3 className="weather__time">
         {currentDate()}
@@ -81,15 +80,14 @@ const Weather = ({ city, getCityWeather, weather }) => {
         {city.content}
       </p>
       <p> wind: <strong>{weather && weather.wind.speed} <span>m/s</span></strong> </p>
-      
-      <Link to={{pathname: `/city`, state: {city}}} > detail weather </Link>    
-      <Link to={{pathname: `/cityforecast`, state: {city}}} > forecast</Link>
       <Route path="/cityforecast" render={({ match, history, location }) => (
-          <div className="app" id="app">
-            <Button onClick={() => { history.goBack(); }}>&#10096; back</Button>
-            <Forecast  location={location} match={match}/>
-          </div>)}>
-        </Route>
+        <div className="app" id="app">
+          <Button onClick={() => { history.goBack(); }}>&#10096; back</Button>
+          <Forecast location={location} match={match} />
+        </div>)}>
+      </Route>
+      <DetailWeather city={city.name} short />
+      <Link to={{ pathname: `/city/${city.name}`, state: { city } }} > show more </Link>
     </div>
   )
 };

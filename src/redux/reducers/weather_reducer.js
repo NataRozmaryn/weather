@@ -1,10 +1,10 @@
 import types from './weather_types';
 
 const initialState = {
-    weatherData: null,
-    cityID: null,
-    isLoading: false,
-    error: null
+    // weatherData: null,
+    // cityID: null,
+    // isLoading: false,
+    // error: null
 };
 export default function weather(state = initialState, action) {
     console.log(state, action);

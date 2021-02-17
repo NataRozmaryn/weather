@@ -19,7 +19,8 @@ export default function cities(state = initialState, action) {
                 [action.payload.data.id]: {
                     id: action.payload.data.id,
                     enabled: true,
-                    name: action.payload.data.name
+                    name: action.payload.data.name,
+                    coord: action.payload.data.coord
                 }
             }
         case types.SEARCH_CITY_FAILURE:

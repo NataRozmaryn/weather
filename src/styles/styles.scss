@@ -21,12 +21,11 @@ $gray_900: #313131;
 
 .app {
     padding: 1rem;
-    // text-align: center;
 }
 
 body {
     background-color: $gray_100;
-    // height: 100vh;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -155,6 +154,7 @@ a{
 }
 
 .weather {
+    max-width: 250px;
     font-size: 1rem;
     background-color: rgba(255, 255, 255, 0.4);
     border: 1px solid $gray_300;
@@ -246,27 +246,32 @@ a{
 
 .forecast {
     color: $white;
-    font-size: 12px;
+    font-size: 16px;
     margin: 10px 0;
 
-    &_item {
-        margin: 10px;
-        border: 1px solid $white; 
+    > .forecast_item {
+        // margin: 10px;
+        margin: 0px;
+        border-bottom: 1px solid $white; 
         background-color: rgba(255, 255, 255, 0.09);
+        .forecast_general {
+            margin: 0px;
+        }
     }
     h2 {
         text-align: center;
     }
     &_img {
         margin: auto;    
-        // margin-left: 50%;
-        // margin-right: 50%;
     }
 
     &_general {
         background-color: rgba(255, 255, 255, 0.2);
         text-align: center;
     }
+}
+.MuiGrid-root{
+    margin: 0;
 }
 .root {
     display: flex;
