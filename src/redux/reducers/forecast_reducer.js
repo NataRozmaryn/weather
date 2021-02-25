@@ -1,11 +1,6 @@
 import types from './weather_types';
 
-const initialState = {
-    weatherData: null,
-    cityID: null,
-    isLoading: false,
-    error: null
-};
+const initialState = {};
 export default function forecast(state = initialState, action) {
     console.log(state, action);
     switch (action.type) {

@@ -1,15 +1,14 @@
 import React from "react";
 import WeatherList from "./components/WeatherList/WeatherList";
 import ResponsiveNavBar from "./components/Navbar/ResponsiveNavbar";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import DetailWeather from "./components/DetailWeather/DetailWeather";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Forecast from "./components/Forecast/Forecast";
 import "./styles.css";
 import "./styles/styles.scss";
 import { Button } from "@material-ui/core";
+import DetailWeatherContainer from "./components/DetailWeather/DetailWeatherContainer";
 
 export default function App() {
-
   return (
     <Router>
       <Switch>
@@ -24,13 +23,13 @@ export default function App() {
           <Route path="/city/:cityName" render={({ match, history, location }) => (
           <div className="app" id="app">
             <Button onClick={() => { history.goBack(); }}>&#10096; back</Button>
-            <DetailWeather city={match?.params?.cityName}/>
+            <DetailWeatherContainer city={match?.params?.cityName}/>
           </div>)}>
         </Route>
-        <Route path="/cityforecast" render={({ match, history, location }) => (
+        <Route path="/cityforecast/:cityName" render={({ match, history }) => (
           <div className="app" id="app">
             <Button onClick={() => { history.goBack(); }}>&#10096; back</Button>
-            <Forecast  location={location} match={match}/>
+            <Forecast  city={match?.params?.cityName}/>
           </div>)}>
         </Route>
       </Switch>

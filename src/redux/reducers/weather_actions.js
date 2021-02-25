@@ -20,6 +20,6 @@ export const getWeather = async (dispatch, city) => {
         const response = await getWeatherData(city.name);
         dispatch(weather_for_city_success({ cityID: city.id, data: response.data }));
     } catch (e) {
-        dispatch(weather_for_city_failure(e));
+        dispatch(weather_for_city_failure({ cityID: city.id, error: e }));
     }
 };
