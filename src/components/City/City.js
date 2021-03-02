@@ -17,9 +17,10 @@ const City = ({ city, toggleCityMonitoring: toggleCity, remCityFromMonitoring: d
         )}
       >
         {city.name}
-      </span> <span onClick={() => deleteCity(cityId)}><CloseIcon/></span>
+      </span> <span onClick={() => deleteCity(cityId)}><CloseIcon /></span>
     </Button>
-)};
+  )
+};
 
 export default connect(
   null,

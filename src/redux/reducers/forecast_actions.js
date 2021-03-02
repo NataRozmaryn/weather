@@ -14,7 +14,7 @@ export const forecastFailure = e => ({
     payload: e
 });
 export const getForecast = async (dispatch, coord) => {
-    //debugger;
+
     dispatch(forecastRequest(coord));
 
     try {

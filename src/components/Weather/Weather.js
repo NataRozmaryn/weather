@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import cx from "classnames";
 import { getWeather } from "../../redux/reducers/weather_actions";
 import moment from 'moment';
 import refrashIcon from "../../icons/refresh.svg";
@@ -9,7 +8,7 @@ import DetailWeatherContainer from "../DetailWeather/DetailWeatherContainer";
 
 const Weather = ({ city, getCityWeather, isLoading = false, timezone, temp, icon, description, windSpeed, data }) => {
     const currentDate = () => {
-        return moment().utc().add(timezone, 'seconds').format('dddd HH:mm')
+        return moment().utc().add(timezone, 'seconds').format('dddd HH:mm');
     }
 
     function handleRefresh() {
@@ -46,20 +45,9 @@ const Weather = ({ city, getCityWeather, isLoading = false, timezone, temp, icon
                     </strong>
                 </h4>
             </article>
-            <p
-                className={cx(
-                    "city-item__text",
-                    city && city.enabled && "city-item__text--selected"
-                )}
-            >
-                {city.content}
-            </p>
-            <p> wind: <strong>{windSpeed} <span>m/s</span></strong></p>
+            <p className="weather__wind"> wind: <strong>{windSpeed} <span>m/s</span></strong></p>
             <DetailWeatherContainer city={city.name} />
             <Link to={{ pathname: `/city/${city.name}`, state: { city } }}> show more </Link>
-            {(isLoading) && <div className="weather-item">
-                Loading...
-            </div>}
         </div>
     )
 };
@@ -77,7 +65,7 @@ const mapStateToProps = (state, props) => {
     const weatherDetail = props.city.id ? state.weatherDetail[props.city.id] : null;
     const data = weatherDetail?.weatherData ? weatherDetail.weatherData : null;
 
-    const { isLoading, timezone, temp, icon, description, windSpeed } = cityWeather.weatherData;
+    const { isLoading, timezone, temp, icon, description, windSpeed } = cityWeather;
     return { isLoading, timezone, temp, icon, description, windSpeed, data };
 }
 export default connect(

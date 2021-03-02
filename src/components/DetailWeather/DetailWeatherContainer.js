@@ -16,7 +16,7 @@ const DetailWeatherContainer = ({ cityName, coord, data, searchCity, getDetailWe
     }, [cityName, coord]);
 
     if (!data) {
-        return (<div className="weather">
+        return (<div className="detailWeather">
             Loading weather detail
         </div>);
     } else {

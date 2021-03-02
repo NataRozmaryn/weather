@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import Weather from "../Weather/Weather";
+import WeatherContainer from "../Weather/WeatherContainer";
 
 
 const WeatherList = ({ cities }) => {
   return (
     <div className="weather-list">
       {cities && cities.length ? cities.map((city, index) => {
-        return <Weather key={`weather-${index}`} city={city} />;
+        return <WeatherContainer key={`weather-${index}`} city={city} />;
       })
         : ""}
     </div>

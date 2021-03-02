@@ -30,8 +30,8 @@ const Forecast = ({ cityName, coord, data, getCityWeather, searchCity }) => {
         return (
             <div className="forecast">
                 {data && data.length ? data.map((item, index) => {
-                    let icon = item.weather[0].icon;
-                    let url = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+                    let icon = item.icon;
+                    let url = `http://openweathermap.org/img/wn/${icon}@2x.png`;
                     let date = moment(item.dt * 1000).format("dddd, DD.MM");
                     let sunrise = moment(item.sunrise * 1000).format("HH:mm");
                     let sunset = moment(item.sunset * 1000).format("HH:mm");
@@ -41,8 +41,8 @@ const Forecast = ({ cityName, coord, data, getCityWeather, searchCity }) => {
                                 <h1>{date}</h1>
                             </Grid>
                             <Grid xs={12} sm={4} item={true}>
-                                <img src={url} alt={item.weather[0].description} className="forecast_img" />
-                                <h2>{item.weather[0].description}</h2>
+                                <img src={url} alt={item.description} className="forecast_img" />
+                                <h2>{item.description}</h2>
                             </Grid>
                             <Grid xs={12} sm={8} item={true}>
                                 <Grid key={index} container spacing={2} className="forecast_general">

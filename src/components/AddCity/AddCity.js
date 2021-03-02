@@ -8,7 +8,7 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 const AddCity = ({ searchCity }) => {
   const [input, setInput] = useState("");
   const classes = useStyles();
-  const handleKeyDown = (e) => {//debugger;
+  const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       searchCity(input);
       setInput("");
@@ -20,21 +20,21 @@ const AddCity = ({ searchCity }) => {
 
   return (
     <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              value={input}
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-              onChange={e => updateInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-            />
-          </div>
+      <div className={classes.searchIcon}>
+        <SearchIcon />
+      </div>
+      <InputBase
+        value={input}
+        placeholder="Search…"
+        classes={{
+          root: classes.inputRoot,
+          input: classes.inputInput,
+        }}
+        inputProps={{ 'aria-label': 'search' }}
+        onChange={e => updateInput(e.target.value)}
+        onKeyDown={handleKeyDown}
+      />
+    </div>
   );
 }
 

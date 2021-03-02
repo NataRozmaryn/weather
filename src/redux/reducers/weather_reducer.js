@@ -9,8 +9,8 @@ export default function weather(state = initialState, action) {
             return {
                 ...state,
                 [action.payload.cityID]: {
+                    ...state[action.payload.cityID],
                     isLoading: true,
-                    weatherData: null
                 }
             }
         }
@@ -18,9 +18,10 @@ export default function weather(state = initialState, action) {
             return {
                 ...state,
                 [action.payload.cityID]: {
-                    isLoading: true,
+                    ...state[action.payload.cityID],
+                    isLoading: false,
+                    error: action.payload.error,
                 },
-                error: action.payload.error
             }
         }
         case types.WEATHER_CITY_SUCCESS: {
@@ -28,15 +29,11 @@ export default function weather(state = initialState, action) {
                 ...state,
                 [action.payload.cityID]: {
                     isLoading: false,
-                    weatherData:
-                    {
-                        isLoading: false, 
-                        timezone: action.payload.data.timezone,
-                        temp: action.payload.data.main.temp, 
-                        icon: action.payload.data.weather[0].icon, 
-                        description: action.payload.data.weather[0].description,
-                        windSpeed: action.payload.data.wind.speed
-                    }
+                    timezone: action.payload.data.timezone,
+                    temp: action.payload.data.main.temp,
+                    icon: action.payload.data.weather[0].icon,
+                    description: action.payload.data.weather[0].description,
+                    windSpeed: action.payload.data.wind.speed
                 }
             }
         }
@@ -45,14 +42,11 @@ export default function weather(state = initialState, action) {
                 ...state,
                 [action.payload.data.id]: {
                     isLoading: false,
-                    weatherData: {
-                        isLoading: false, 
-                        timezone: action.payload.data.timezone,
-                        temp: action.payload.data.main.temp, 
-                        icon: action.payload.data.weather[0].icon, 
-                        description: action.payload.data.weather[0].description,
-                        windSpeed: action.payload.data.wind.speed
-                    }
+                    timezone: action.payload.data.timezone,
+                    temp: action.payload.data.main.temp,
+                    icon: action.payload.data.weather[0].icon,
+                    description: action.payload.data.weather[0].description,
+                    windSpeed: action.payload.data.wind.speed
                 }
             }
         default:

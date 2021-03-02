@@ -2,8 +2,6 @@ $font-weight-light: 300;
 $font-weight-medium: 400;
 $font-weight-bold: 700;
 
-// Material design colors...wooo!
-// gdarrigo : P
 $background: #FDFDFD;
 $white: #FFFFFF;
 $black: #000000;
@@ -60,7 +58,7 @@ a {
 
 .toggleCity {
     display: flex;
-    overflow-x: auto; //scroll; 
+    overflow-x: auto; //scroll;
 }
 
 .search-bar {
@@ -157,22 +155,50 @@ a {
 .weather-list {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .weather {
-    max-width: 250px;
+    // max-width: 250px;
+    width: 250px;
     min-height: 512px;
     font-size: 1rem;
     background-color: rgba(255, 255, 255, 0.4);
     border: 1px solid $gray_300;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
-    margin: 0 auto 1rem;
+    // margin: 0 auto 1rem;
     padding: 1rem;
     position: relative;
+    &-item {
+        position: relative;
+    }
+    &-loader {
+        background: #b3b3b35e;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 25px;
+      }
 
     &__header {
+        height: 28px;
         display: flex;
         justify-content: space-between;
+    }
+
+    &__time {
+        height: 21.6px;
+    }
+    &__wind {
+        height: 19.2px;
+    }
+    &__temperature {
+        height: 112.8px; 
     }
 
     &__refresh {
@@ -184,11 +210,6 @@ a {
             height: 15px;
             width: 15px;
         }
-    }
-
-    @media only screen and (min-width: 1024px) {
-        padding: 2rem;
-        width: 50%;
     }
 
     &__city {
@@ -217,6 +238,8 @@ a {
     }
 
     &__weather {
+        height: 39.86px;
+        
         &__title {
             font-weight: $font-weight-light;
             margin-bottom: 0;
@@ -258,8 +281,10 @@ a {
 }
 
 .detailWeather {
-    min-height: 218px;
+    // min-height: 218px;
     min-width: 250px;
+    height: 218px;
+    // width: 250px;
 }
 
 
@@ -269,7 +294,6 @@ a {
     margin: 10px 0;
 
     >.forecast_item {
-        // margin: 10px;
         margin: 0px;
         border-bottom: 1px solid $white;
         background-color: rgba(255, 255, 255, 0.09);

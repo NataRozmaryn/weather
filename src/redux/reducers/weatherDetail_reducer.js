@@ -1,15 +1,11 @@
 import types from './weather_types';
 
 const initialState = {
-    weatherData: null,
-    cityID: null,
-    isLoading: false,
-    error: null
 };
 export default function weatherDetail(state = initialState, action) {
     console.log(state, action);
     switch (action.type) {
-        case types.WEATHER_DETAIL_REQUEST: {//debugger;
+        case types.WEATHER_DETAIL_REQUEST: {
             return {
                 ...state,
                 [action.payload.cityID]: {
@@ -30,6 +26,14 @@ export default function weatherDetail(state = initialState, action) {
                 [action.payload.cityID]: {
                     isLoading: false,
                     weatherData: action.payload.data.hourly
+                        .map((el) => ({
+                            dt: el.dt,
+                            icon: el.weather[0].icon,
+                            feels_like: el.feels_like,
+                            temp: el.temp,
+                            main: el.weather[0].main,
+                            wind_speed: el.wind_speed
+                        }))
                 }
             }
         }

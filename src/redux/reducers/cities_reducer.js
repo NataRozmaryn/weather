@@ -27,17 +27,6 @@ export default function cities(state = initialState, action) {
             console.log("weather for the city failed to receive");
             return state
 
-
-        // case types.ADD_CITY:
-        //     console.log("adding city");
-        //     return {
-        //         [action.payload.data.id]: {
-        //             id: action.payload.data.id,
-        //             enabled: true,
-        //             name: action.payload.data.name
-        //         }
-        //     }
-
         case types.TOGGLE_CITY: {
             const { id } = action.payload;
             return {
